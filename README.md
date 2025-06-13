@@ -1,6 +1,6 @@
 # Contact Management API with Email and Image Upload
 
-This project is a REST API that includes user authentication, password reset functionality, and contact management features. It integrates with Brevo email service and Cloudinary image upload service.
+ This project is a REST API that includes user authentication, password reset functionality, and contact management features. It integrates with Brevo email service and Cloudinary image upload service.
 
 ## 🚀 Features
 
