@@ -1,8 +1,31 @@
-# Contact Management API with Email and Image Upload
+<h1 align="center">NODEJS-HW-06</h1>
 
- This project is a REST API that includes user authentication, password reset functionality, and contact management features. It integrates with Brevo email service and Cloudinary image upload service.
+<p align="center">Empowering Secure Connections, Simplifying User Management</p>
 
-## 🚀 Features
+<p align="center">
+  <!-- Dynamic badges - You may need to customize these for your specific GitHub repository -->
+  <img src="https://img.shields.io/github/last-commit/emrealtnts0/nodejs-hw-06?color=blue&label=last%20commit" alt="Last Commit">
+  <img src="https://img.shields.io/github/languages/top/emrealtnts0/nodejs-hw-06?color=orange&label=JavaScript" alt="JavaScript Percentage">
+  <img src="https://img.shields.io/github/languages/count/emrealtnts0/nodejs-hw-06?color=green&label=languages" alt="Languages Count">
+</p>
+
+<p align="center">Built with the tools and technologies:</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=node.js&logoColor=white" alt="Node.js">
+  <img src="https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white" alt="Express.js">
+  <img src="https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge&logo=mongodb&logoColor=white" alt="MongoDB">
+  <img src="https://img.shields.io/badge/npm-CB3837?style=for-the-badge&logo=npm&logoColor=white" alt="npm">
+  <img src="https://img.shields.io/badge/Cloudinary-3399FF?style=for-the-badge&logo=cloudinary&logoColor=white" alt="Cloudinary">
+  <img src="https://img.shields.io/badge/ESLint-4B32C3?style=for-the-badge&logo=eslint&logoColor=white" alt="ESLint">
+  <img src="https://img.shields.io/badge/YAML-CB171E?style=for-the-badge&logo=yaml&logoColor=white" alt="YAML">
+</p>
+
+## Project Overview
+
+This project is a REST API that includes user authentication, password reset functionality, and robust contact management features. It seamlessly integrates with Brevo for email services and Cloudinary for image upload and management.
+
+## Features
 
 - User authentication (register, login, logout)
 - JWT-based session management
@@ -11,186 +34,86 @@
 - Photo upload and management (Cloudinary integration)
 - Email sending (Brevo SMTP integration)
 
-## 📋 Requirements
+## Installation
 
-- Node.js (v18 or higher)
-- MongoDB
-- Brevo account (for email sending)
-- Cloudinary account (for image upload)
+1.  **Clone the project**:
+    ```bash
+    git clone <repository-url>
+    cd nodejs-hw-06
+    ```
+2.  **Install dependencies**:
+    ```bash
+    npm install
+    ```
+3.  **Create `.env` file**:
+    ```bash
+    cp .env.example .env
+    ```
+4.  **Configure Environment Variables**: Edit the `.env` file and set the required variables.
+    ```env
+    # Server
+    PORT=3000
 
-## 🔧 Installation
+    # Database
+    MONGODB_URI=mongodb://localhost:27017/your-database-name
 
-1. Clone the project:
-```bash
-git clone <repository-url>
-cd nodejs-hw-06
-```
+    # JWT
+    JWT_SECRET=your-jwt-secret
 
-2. Install dependencies:
-```bash
-npm install
-```
+    # Email (Brevo)
+    SMTP_HOST=smtp-relay.brevo.com
+    SMTP_PORT=587
+    SMTP_USER=your-brevo-username
+    SMTP_PASSWORD=your-brevo-password
+    SMTP_FROM=your-verified-email@domain.com
 
-3. Create `.env` file:
-```bash
-cp .env.example .env
-```
+    # Frontend Domain
+    APP_DOMAIN=http://localhost:3000/auth
 
-4. Edit `.env` file and set required variables:
-```env
-# Server
-PORT=3000
+    # Cloudinary
+    CLOUDINARY_CLOUD_NAME=your-cloud-name
+    CLOUDINARY_API_KEY=your-api-key
+    CLOUDINARY_API_SECRET=your-api-secret
+    ```
+5.  **Start the application**:
+    ```bash
+    npm start
+    ```
 
-# Database
-MONGODB_URI=mongodb://localhost:27017/your-database-name
+## API Endpoints
 
-# JWT
-JWT_SECRET=your-jwt-secret
+### Authentication
 
-# Email (Brevo)
-SMTP_HOST=smtp-relay.brevo.com
-SMTP_PORT=587
-SMTP_USER=your-brevo-username
-SMTP_PASSWORD=your-brevo-password
-SMTP_FROM=your-verified-email@domain.com
+*   `POST /api/auth/register`: Register a new user.
+*   `POST /api/auth/login`: Log in an existing user.
+*   `POST /api/auth/send-reset-email`: Request a password reset email.
+*   `POST /api/auth/reset-pwd`: Reset user password using a token.
+*   `POST /api/auth/logout`: Log out the current user.
 
-# Frontend Domain
-APP_DOMAIN=http://localhost:3000/auth
+### Contact Management
 
-# Cloudinary
-CLOUDINARY_CLOUD_NAME=your-cloud-name
-CLOUDINARY_API_KEY=your-api-key
-CLOUDINARY_API_SECRET=your-api-secret
-```
+*   `GET /api/contacts`: Retrieve all contacts (with optional query parameters for pagination, limit, and favorite status).
+*   `GET /api/contacts/:contactId`: Retrieve a specific contact by ID.
+*   `POST /api/contacts`: Create a new contact (supports photo upload).
+*   `PATCH /api/contacts/:contactId`: Update an existing contact (supports photo update).
+*   `DELETE /api/contacts/:contactId`: Delete a contact by ID.
 
-5. Start the application:
-```bash
-npm start
-```
+## Security
 
-## 📚 API Documentation
+*   All sensitive data is configured via `.env` file.
+*   JWT tokens are used for session management with defined expiration.
+*   Password reset tokens have a limited validity period.
+*   Passwords are securely hashed before storage.
+*   Most API endpoints require authentication with a Bearer token.
 
-### Authentication Endpoints
+## Email Service
 
-#### User Registration
-```http
-POST /api/auth/register
-Content-Type: application/json
+The application integrates with Brevo for email sending, particularly for password reset functionalities. Email templates are designed to be informative and secure.
 
-{
-    "email": "user@example.com",
-    "password": "password123",
-    "name": "John Doe"
-}
-```
+## Image Upload
 
-#### User Login
-```http
-POST /api/auth/login
-Content-Type: application/json
+Image uploads are handled via Cloudinary, supporting various formats with automatic optimization and size limits.
 
-{
-    "email": "user@example.com",
-    "password": "password123"
-}
-```
+## License
 
-#### Send Password Reset Email
-```http
-POST /api/auth/send-reset-email
-Content-Type: application/json
-
-{
-    "email": "user@example.com"
-}
-```
-
-#### Reset Password
-```http
-POST /api/auth/reset-pwd
-Content-Type: application/json
-
-{
-    "token": "jwt-token-from-email",
-    "password": "new-password123"
-}
-```
-
-#### Logout
-```http
-POST /api/auth/logout
-Authorization: Bearer <access-token>
-```
-
-### Contact Management Endpoints
-
-#### Create Contact (with Photo)
-```http
-POST /api/contacts
-Authorization: Bearer <access-token>
-Content-Type: multipart/form-data
-
-{
-    "name": "Contact Name",
-    "email": "contact@example.com",
-    "phone": "1234567890",
-    "photo": <file>
-}
-```
-
-#### Update Contact (with Photo)
-```http
-PATCH /api/contacts/:contactId
-Authorization: Bearer <access-token>
-Content-Type: multipart/form-data
-
-{
-    "name": "Updated Name",
-    "photo": <file>
-}
-```
-
-## 🔐 Security
-
-- All sensitive data is stored in `.env` file
-- JWT tokens are valid for 15 minutes
-- Password reset tokens are valid for 5 minutes
-- Passwords are hashed before storage
-- All API endpoints (except registration and login) require authentication
-
-## 📧 Email Template
-
-The password reset email includes:
-- User's name
-- Password reset link
-- Token expiration information
-- Security warnings
-
-## 🖼️ Image Upload
-
-- Image upload using Cloudinary service
-- Supported formats: JPG, PNG, GIF
-- Maximum file size: 5MB
-- Automatic image optimization
-
-## ⚠️ Error Codes
-
-- 400: Bad Request (validation error)
-- 401: Unauthorized (token error)
-- 404: Not Found
-- 409: Conflict (e.g., email already in use)
-- 500: Server Error
-
-## 🧪 Testing
-
-```bash
-# Run all tests
-npm test
-
-# Run specific test file
-npm test -- <test-file-name>
-```
-
-## 📝 License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details. 
+This project is licensed under the MIT License. See the LICENSE file for details. 
